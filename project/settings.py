@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 import environ
+import django_on_heroku
 
 env = environ.Env(
     # set casting, default value
@@ -143,3 +144,10 @@ INTERNAL_IPS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# for django on heroku
+django_on_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
+
+
