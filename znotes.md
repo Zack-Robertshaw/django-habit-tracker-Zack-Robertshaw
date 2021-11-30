@@ -30,3 +30,5 @@ habit edit/log
 
 ## templates needed
     base.html
+
+## using console to do queries
