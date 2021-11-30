@@ -27,3 +27,6 @@ habit edit/log
     delete habit
     log habit
     edit habit
+
+## templates needed
+    base.html
