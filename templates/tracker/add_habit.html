@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+{% if request.user.is_authenticated %}
+<h1>Add Habit</h1>
+
+<div>
+  <form action="{% url 'add_habit' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+      <button type="submit">Submit Habit</button>
+      <a href="{% url 'home' %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% else %}<div class="maincontainer"><p style="text-align: center;">Already have an account?<br><a class="washed-blue" href="/accounts/login/">Login</a></p><hr><p style="text-align: center;">Need to create an account?<br><a class="washed-blue" href="/accounts/register/">Register</a></p></div>
+{% endif %}
+
+
+
+
+
+{% endblock %}

@@ -17,10 +17,10 @@ class Habit(models.Model):
         created_at = models.DateTimeField(auto_now_add=True)
 
         def __str__(self):
-            return self.title
+            return self.name
 
         def __repr__(self):
-            return f"<Habit name={self.title}>"
+            return f"<Habit name={self.name}>"
 
 class Record(models.Model):
     habit_id = models.ForeignKey(
