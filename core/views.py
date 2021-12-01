@@ -7,16 +7,14 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     user = request.user
-    decks = Habit.objects.filter(user=user.pk)
+    habits = Habit.objects.filter(user=user.pk)
 
     return render(request, "tracker/home.html", {
-        "user": user,})
-# # "habits": habits,   will be needed eventually.  Don't forget to put it back in.
-#         "user": user, "habits": habits,})
+        "user": user, "habits": habits,})
 
-#this shows all habits at homepage
-def show_habit(request, pk):
-    pass
+# #this shows all habits at homepage don't think I need this
+# def show_habit(request, pk):
+#     pass
 
 
 
