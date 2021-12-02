@@ -1,24 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>home.html</h2>
+<h2>view and add habits</h2>
+<div>
+    <a href="{% url 'add_habit' %}">Add Habit</a>
+</div>
 
 
-{% if request.user.is_authenticated %}
+
 <div>
     {% for habit in habits %}
     <p>{{ habit.name }}</p> 
     <p>{{ habit.goal }}</p>
-<!-- put href for record/edit and delete here -->
+<!-- put href for record/edit here -->
+    <a href="{% url 'delete_habit' pk=habit.pk %}">Delete Habit</a>
     {% endfor %}
-    <a href="{% url 'add_habit' %}">Add Habit</a>
-    </div></div>
-  </div>
-  
+</div>
 
 
-
-{% else %}<div><p style="text-align: center;">Already have an account?<br><a class="washed-blue" href="/accounts/login/">Login</a></p><hr><p style="text-align: center;">Need to create an account?<br><ahref="/accounts/register/">Register</a></p></div>
-{% endif %}
 {% endblock %}
 

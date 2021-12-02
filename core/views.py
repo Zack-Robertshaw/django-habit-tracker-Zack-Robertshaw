@@ -4,7 +4,6 @@ from .forms import HabitForm, RecordForm
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
 def home(request):
     user = request.user
     habits = Habit.objects.filter(user=user.pk)
@@ -12,13 +11,10 @@ def home(request):
     return render(request, "tracker/home.html", {
         "user": user, "habits": habits,})
 
-# #this shows all habits at homepage don't think I need this
-# def show_habit(request, pk):
-#     pass
 
 
 
-#make a new habit w/ form
+@login_required
 def add_habit(request):
     user = request.user
     if request.method == 'GET':
@@ -29,7 +25,6 @@ def add_habit(request):
             habit = form.save(commit=False)
             habit.user_id = user.pk
             habit.save()
-            # Should ideally redirect to add card
             return redirect(to='home')
 
     return render(request, "tracker/add_habit.html", {
@@ -37,12 +32,16 @@ def add_habit(request):
 
 
 
+@login_required
+def delete_habit(request, pk):
+    habit = get_object_or_404(Habit, pk=pk)
+    if request.method == 'POST':
+        habit.delete()
+        return redirect(to='/')
+    return render(request, "tracker/delete_habit.html",
+                  {"habit": habit})
+
+
 # #edit, update, record habit, show progress on this page
 # def edit_habit(request, pk):
-#     pass
-
-
-
-# #button on homepage habit for delete
-# def delete_habit(request,pk):
 #     pass
