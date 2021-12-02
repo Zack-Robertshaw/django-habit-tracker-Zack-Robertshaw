@@ -1,18 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>view and add habits</h2>
-<div>
-    <a href="{% url 'add_habit' %}">Add Habit</a>
-</div>
 
+<div>
+<form action="{% url 'home' %}" method="POST">
+    <h3>Make a New Habit</h3>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"> Create Habit</button>
+</div>
 
 
 <div>
     {% for habit in habits %}
-    <p>{{ habit.name }}</p> 
-    <p>{{ habit.goal }}</p>
-<!-- put href for record/edit here -->
+    <p>Habit: {{ habit.name }}</p> 
+    <p>Goal: {{ habit.goal }}</p>
+    <a href="{% url 'edit_habit' pk=habit.pk %}">Habit Details</a>
     <a href="{% url 'delete_habit' pk=habit.pk %}">Delete Habit</a>
     {% endfor %}
 </div>

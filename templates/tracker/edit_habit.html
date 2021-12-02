@@ -3,4 +3,13 @@
 
 {% block content %}
 <h3>edit habit.html</h3>
+<div>
+    
+    
+    <div>
+        {% for record in records %}
+        <p>Record: {{ record.amount }}</p> 
+        {% endfor %}
+    </div>
+    
 {% endblock %}

@@ -12,7 +12,7 @@ class User(AbstractUser):
 class Habit(models.Model):
         user = models.ForeignKey(
             'User', on_delete=models.CASCADE, default=None,)
-        name = models.TextField()
+        name = models.CharField(max_length=100)
         goal = models.IntegerField()
         created_at = models.DateTimeField(auto_now_add=True)
 
@@ -26,12 +26,13 @@ class Record(models.Model):
     habit_id = models.ForeignKey(
             'Habit', on_delete=models.CASCADE, default=None,)
     amount = models.IntegerField()
+    # record_day = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
-        return self.title
+        return self.amount
 
     def __repr__(self):
-        return f"<Record name={self.title}>"
-
+        return f"<Record name={self.amount}>"
 

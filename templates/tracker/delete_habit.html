@@ -8,7 +8,7 @@
       {% csrf_token %}
       <p>Are you sure you want to delete <span class="b">{{ habit.name }}</span>?</p>
       <div>
-        <button type="submit">Delete Deck</button><br />
+        <button type="submit">Delete Habit</button><br />
         <a href="{% url 'home' %}">Cancel</a>
       </div>
     </form>
