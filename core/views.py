@@ -26,22 +26,12 @@ def home(request):
 
 
 @login_required
-def edit_habit(request, pk):
+def habit_records(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     records = Record.objects.filter(habit_id=habit.pk)
 
-    if request.method == 'GET':
-        form = RecordForm()
-    else:
-        form = RecordForm(data=request.POST)
-        if form.is_valid():
-            record = form.save(commit=False)
-            record.habit_id = habit.pk
-            record.save()
-            return redirect(to='edit_habit')
-
-    return render(request, "tracker/edit_habit.html", {
-        "records": records, "form": form, "habit": habit})
+    return render(request, "tracker/habit_records.html", {
+        "records": records, "habit": habit})
 
 
 
@@ -55,21 +45,35 @@ def delete_habit(request, pk):
                   {"habit": habit})
 
 
-@login_required
-def add_habit(request):
-    user = request.user
+def add_record(request):
+    habit = get_object_or_404(Habit)
+    records = Record.objects.filter(habit=habit.pk)
     if request.method == 'GET':
-        form = HabitForm()
+        form = RecordForm()
     else:
-        form = HabitForm(data=request.POST)
+        form = RecordForm(data=request.POST)
         if form.is_valid():
-            habit = form.save(commit=False)
-            habit.user_id = user.pk
-            habit.save()
+            record = form.save(commit=False)
+            record.habit = habit.pk
+            record.save()
             return redirect(to='home')
 
-    return render(request, "tracker/add_habit.html", {
-        "user": user, "form": form, })
+    return render(request, "tracker/add_record.html", {
+         "form": form, "records": records})
 
 
+# def add_record(request,):
+#     habit = get_object_or_404(Habit, pk=habit_pk)
+#     if request.method == 'GET':
+#         form = RecordForm()
+#     else:
+#         form = RecordForm(data=request.POST)
+#         if form.is_valid():
+#             record = form.save(commit=False)
+#             record.habit_id = habit.pk
+#             record.save()
+#             return redirect(to='habit_records')
 
+# return render(request, "tracker/add_record.html", {
+#     "form": form, "habit": habit 
+# 

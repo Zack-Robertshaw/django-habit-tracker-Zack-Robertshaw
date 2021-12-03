@@ -15,7 +15,7 @@
     {% for habit in habits %}
     <p>Habit: {{ habit.name }}</p> 
     <p>Goal: {{ habit.goal }}</p>
-    <a href="{% url 'edit_habit' pk=habit.pk %}">Habit Details</a>
+    <a href="{% url 'habit_records' pk=habit.pk %}">Habit Details</a>
     <a href="{% url 'delete_habit' pk=habit.pk %}">Delete Habit</a>
     {% endfor %}
 </div>
