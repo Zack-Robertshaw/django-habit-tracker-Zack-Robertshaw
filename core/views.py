@@ -56,7 +56,7 @@ def add_record(request,pk):
             record = form.save(commit=False)
             record.habit_id = habit.pk
             record.save()
-            return redirect(to='home')
+            return redirect(to='habit_records', pk=pk)
 
     return render(request, "tracker/add_record.html", {
         "habit": habit, "form": form, "records": records})
