@@ -4,9 +4,9 @@
 {% block content %}
 <h3>edit habit.html</h3>
 <div>
-    
-    <a href="{% url 'add_record' %}">Record Progress</a>
-    <div>
+        <a href="{% url 'add_record' pk=habit.pk %}">Record Progress</a>
+
+        <div>
         {% for record in records %}
         <p>Record: {{ record.amount }}</p> 
         {% endfor %}

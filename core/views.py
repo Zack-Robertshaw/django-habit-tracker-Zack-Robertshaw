@@ -45,21 +45,21 @@ def delete_habit(request, pk):
                   {"habit": habit})
 
 
-def add_record(request):
-    habit = get_object_or_404(Habit)
-    records = Record.objects.filter(habit=habit.pk)
+def add_record(request,pk):
+    habit = get_object_or_404(Habit, pk=pk)
+    records = Record.objects.filter(pk=habit.pk)
     if request.method == 'GET':
         form = RecordForm()
     else:
         form = RecordForm(data=request.POST)
         if form.is_valid():
             record = form.save(commit=False)
-            record.habit = habit.pk
+            record.habit_id = habit.pk
             record.save()
             return redirect(to='home')
 
     return render(request, "tracker/add_record.html", {
-         "form": form, "records": records})
+        "habit": habit, "form": form, "records": records})
 
 
 # def add_record(request,):
