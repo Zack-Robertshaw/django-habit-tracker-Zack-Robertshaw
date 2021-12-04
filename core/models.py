@@ -26,7 +26,7 @@ class Record(models.Model):
     habit = models.ForeignKey(
             'Habit', on_delete=models.CASCADE, default=None,)
     amount = models.IntegerField()
-    # record_day = models.DateField(null=True)
+    date = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 # when these aren't commented out throws error at add_record in admin

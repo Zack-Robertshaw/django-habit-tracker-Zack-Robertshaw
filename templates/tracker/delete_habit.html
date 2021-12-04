@@ -2,11 +2,10 @@
 
 
 {% block content %}
-<h3>delete habit.html</h3>
 <div>
     <form action="{% url 'delete_habit' pk=habit.pk %}" method="POST">
       {% csrf_token %}
-      <p>Are you sure you want to delete <span class="b">{{ habit.name }}</span>?</p>
+      <p>Are you sure you want to delete <span>{{ habit.name }}</span>?</p>
       <div>
         <button type="submit">Delete Habit</button><br />
         <a href="{% url 'home' %}">Cancel</a>

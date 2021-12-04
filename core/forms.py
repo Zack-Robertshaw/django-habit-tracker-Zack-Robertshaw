@@ -16,4 +16,5 @@ class RecordForm(forms.ModelForm):
         model = Record
         fields = [
             "amount",
+            "date",
         ]

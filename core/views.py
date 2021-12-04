@@ -62,18 +62,3 @@ def add_record(request,pk):
         "habit": habit, "form": form, "records": records})
 
 
-# def add_record(request,):
-#     habit = get_object_or_404(Habit, pk=habit_pk)
-#     if request.method == 'GET':
-#         form = RecordForm()
-#     else:
-#         form = RecordForm(data=request.POST)
-#         if form.is_valid():
-#             record = form.save(commit=False)
-#             record.habit_id = habit.pk
-#             record.save()
-#             return redirect(to='habit_records')
-
-# return render(request, "tracker/add_record.html", {
-#     "form": form, "habit": habit 
-# 
