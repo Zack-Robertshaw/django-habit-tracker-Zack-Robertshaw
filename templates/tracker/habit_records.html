@@ -3,6 +3,12 @@
 
 {% block content %}
 
+{% load static %}
+
+{% block javascript %}
+<script src={% static 'js/script.js' %} defer></script>
+{% endblock javascript %}
+
 
 <div class="columns">
     <div class="column">
@@ -14,16 +20,27 @@
         <div class="card">
             <div class="card-content">
                 <h2 class="title"><a href="{% url 'home' %}">Back to Habits</a></h2>
+            </div>            
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h2 class="title">Here's your progress towards {{ habit.name }}</h2>
+                <h2 class="subtitle">Your goal is:</h2>
+                <h1 class="title" id="goal">{{ habit.goal }}</h1>
             </div>
         </div>
+
 
     </div>
     <div class="column">
         {% for record in records %}
         <div class="card">
-            <div class="card-content">
-                <h2 class="title">Record: {{ record.amount }}</h2>
+            <div class="card-content" >
+                <h2 class="title">Record: <span class="records">{{ record.amount }}</span></h2>
                 <h3 class="subtitle">Date Added: {{ record.date }}</h3>
+            </div>
+            <div class="card-footer-item">
+                <a href="{% url 'delete_record' pk=record.pk %}">Delete Record</a> 
             </div>
         </div>
         {% endfor %}
@@ -32,8 +49,9 @@
     <div class="column">
         <div class="card">
             <div class="card-content">
-                <h2 class="title">title</h2>
-                <h3 class="subtitle">subtitle</h3>
+                <h3 class="subtitle">How many more you need to reach your goal</h3>
+                <h2 id="display" class="title"></h2>
+                
             </div>
         </div>
     </div>

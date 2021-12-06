@@ -62,3 +62,16 @@ def add_record(request,pk):
         "habit": habit, "form": form, "records": records})
 
 
+@login_required
+def delete_record(request, pk):
+    record = get_object_or_404(Record, pk=pk)
+    habit = get_object_or_404(Habit, pk=pk)
+
+    if request.method == 'POST':
+        record.delete()
+        return redirect(to='habit_records', pk=pk)
+
+    return render(request, "tracker/delete_record.html",
+                  { "habit": habit, "record": record})
+
+
