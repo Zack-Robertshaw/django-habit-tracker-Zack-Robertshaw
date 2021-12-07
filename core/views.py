@@ -75,3 +75,5 @@ def delete_record(request, pk):
                   { "habit": habit, "record": record})
 
 
+
+

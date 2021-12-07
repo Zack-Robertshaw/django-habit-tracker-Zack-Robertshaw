@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 
     # Third-party
     'debug_toolbar',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
 
     # Project-specific
     'core',
+    'api',
 ]
 
 MIDDLEWARE = [

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 from core import views
+from api import views as api_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,11 @@ urlpatterns = [
     path('tracker/<int:pk>/habit_records/', views.habit_records, name='habit_records'),
     path('tracker/<int:pk>/delete_habit/', views.delete_habit, name='delete_habit'),
     path('tracker/<int:pk>/delete_record/', views.delete_record, name='delete_record'),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/habits/', api_views.HabitListView.as_view(), name="api_home"),
+    # below might be wrong
+    path('api/habits/<int:pk>/', api_views.HabitListView.as_view(), name="api_home"),
+
 
 ]
 
