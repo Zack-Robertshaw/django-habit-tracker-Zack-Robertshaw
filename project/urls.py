@@ -30,7 +30,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/habits/', api_views.HabitListView.as_view(), name="api_home"),
     # below might be wrong
-    path('api/habits/<int:pk>/', api_views.HabitListView.as_view(), name="api_home"),
+    path('api/habits/<int:pk>/', api_views.HabitDetailView.as_view(), name="api_home"),
 
 
 ]

@@ -8,6 +8,9 @@ class HabitForm(forms.ModelForm):
         fields = [
             "name",
             "goal",
+            "goal_unit",
+            "duration",
+
         ]
 
 

@@ -6,6 +6,10 @@ class HabitSerializer(serializers.ModelSerializer):
         model = Habit
         fields = (
             'pk',
+            'user',
             'name',
             'goal',
+            'goal_unit',
+            'duration',
+            'created_at',
         )
