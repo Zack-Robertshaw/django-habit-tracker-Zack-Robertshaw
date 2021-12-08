@@ -29,9 +29,9 @@ urlpatterns = [
     path('tracker/<int:pk>/delete_record/', views.delete_record, name='delete_record'),
     path('api-auth/', include('rest_framework.urls')),
     path('api/habits/', api_views.HabitListView.as_view(), name="api_home"),
-    # below might be wrong
     path('api/habits/<int:pk>/', api_views.HabitDetailView.as_view(), name="api_home"),
-
+    path('api/records/', api_views.RecordListView.as_view(), name="api_home"),
+    path('api/records/<int:pk>/', api_views.RecordDetailView.as_view(), name="api_home"),
 
 ]
 
