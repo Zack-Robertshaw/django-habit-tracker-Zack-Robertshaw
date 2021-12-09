@@ -18,6 +18,9 @@ class Habit(models.Model):
         goal_unit = models.CharField(max_length=100, null=True)
         created_at = models.DateTimeField(auto_now_add=True)
 
+        class Meta:
+            ordering = ('name',)
+
         def __str__(self):
             return self.name
 
@@ -25,16 +28,18 @@ class Habit(models.Model):
             return f"<Habit name={self.name}>"
 
 class Record(models.Model):
+    user = models.ForeignKey(
+        'User', on_delete=models.CASCADE, default=None, null=True)
     habit = models.ForeignKey(
-            'Habit', on_delete=models.CASCADE, default=None,)
+        'Habit', on_delete=models.CASCADE, default=None,)
     amount = models.IntegerField()
     date = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 # when these aren't commented out throws error at add_record in admin
     def __str__(self):
-        return self.amount
+        return f" Record for {self.habit.name}"
 
     def __repr__(self):
-        return f"<Record name={self.amount}>"
+        return f"<Record name={self.user}>"
 

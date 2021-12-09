@@ -6,7 +6,7 @@ from django.shortcuts import render
 from rest_framework import generics, permissions, renderers, viewsets
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view, action
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.reverse import reverse 
 
@@ -17,29 +17,33 @@ from .serializers import HabitSerializer, RecordSerializer
 
 # Create your views here.
 
-@api_view(['GET']) 
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        # 'api_home' might be wrong
-        'habits': reverse('api_home', request=request, format=format)
-    })
+# @api_view(['GET']) 
+# def api_root(request, format=None):
+#     return Response({
+#         'users': reverse('user-list', request=request, format=format),
+#         # 'api_home' might be wrong
+#         'habits': reverse('api_home', request=request, format=format)
+#     })
 
-class HabitListView(ListAPIView):
+# class api_root(ListAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
+class HabitListView(ListCreateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
 
 
-class HabitDetailView(RetrieveAPIView):
+class HabitDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     
     
 
-class RecordListView(ListAPIView):
+class RecordListView(ListCreateAPIView):
     queryset = Record.objects.all()
     serializer_class = RecordSerializer
 
-class RecordDetailView(RetrieveAPIView):
+class RecordDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Record.objects.all()
     serializer_class = RecordSerializer

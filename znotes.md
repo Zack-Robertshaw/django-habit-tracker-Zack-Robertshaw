@@ -32,3 +32,6 @@ habit edit/log
     base.html
 
 ## using console to do queries
+
+api > views.py
+change class to 
