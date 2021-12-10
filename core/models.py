@@ -31,7 +31,7 @@ class Record(models.Model):
     user = models.ForeignKey(
         'User', on_delete=models.CASCADE, default=None, null=True)
     habit = models.ForeignKey(
-        'Habit', on_delete=models.CASCADE, default=None,)
+        'Habit', on_delete=models.CASCADE, default=None, related_name="records")
     amount = models.IntegerField()
     date = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)

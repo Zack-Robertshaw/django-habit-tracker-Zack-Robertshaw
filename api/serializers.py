@@ -8,20 +8,15 @@ from django.contrib.auth.models import User
 # class UserSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = User
+#         fields = (all)
 
-class HabitSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Habit
-        fields = (
-            'pk',
-            'user',
-            'name',
-            'goal',
-            'goal_unit',  
-            'duration',
-            'created_at',
-        )
-    
+class RecordsForHabitSerializer(serializers.ModelSerializer):
+    class  Meta:
+        Model = Record
+        fields = ("amount",
+                "date",)
+
+
 class RecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Record
@@ -33,3 +28,19 @@ class RecordSerializer(serializers.ModelSerializer):
             'date',
             'created_at',
         )
+
+class HabitSerializer(serializers.ModelSerializer):
+    records = RecordSerializer(many=True)
+    class Meta:
+        model = Habit
+        fields = (
+            'pk',
+            'user',
+            'name',
+            'goal',
+            'goal_unit',  
+            'duration',
+            'created_at',
+            'records',
+        )
+    
