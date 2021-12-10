@@ -34,6 +34,9 @@ urlpatterns = [
     path('api/records/', api_views.RecordListView.as_view(), name="api_home"),
     path('api/records/<int:pk>/', api_views.RecordDetailView.as_view(), name="api_home"),
 
+    # path('api-auth/', include('rest_framework.urls')),
+    # path('api/', include('api.urls')),
+
 ]
 
 if settings.DEBUG:

@@ -10,27 +10,35 @@ from django.contrib.auth.models import User
 #         model = User
 #         fields = (all)
 
-class RecordsForHabitSerializer(serializers.ModelSerializer):
-    class  Meta:
-        Model = Record
-        fields = ("amount",
-                "date",)
+# class RecordsForHabitSerializer(serializers.ModelSerializer):
+#         habit = serializers.StringRelatedField()
+#     class  Meta:
+#         Model = Record
+#         fields = (
+#                 'habit'
+#                 'amount',
+#                 'date',)
 
 
 class RecordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Record
-        fields = (
-            'pk',
-            'user',
-            'habit',
-            'amount',
-            'date',
-            'created_at',
-        )
+        # habit = serializers.StringRelatedField(read_only=True)
+        # user = serializers.StringRelatedField(read_only=True)
+
+        class Meta:
+            model = Record
+            fields = (
+                'pk',
+                'user',
+                'habit',
+                'amount',
+                'date',
+                'created_at',
+            )
 
 class HabitSerializer(serializers.ModelSerializer):
-    records = RecordSerializer(many=True)
+    # pk = RecordSerializer(read_only=True)
+    records = RecordSerializer(many=True, read_only=True)
+    # user = serializers.StringRelatedField()
     class Meta:
         model = Habit
         fields = (
