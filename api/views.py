@@ -17,13 +17,20 @@ from .serializers import HabitSerializer, RecordSerializer
 
 # Create your views here.
 
-# @api_view(['GET']) 
+# @api_view(['GET'])
 # def api_root(request, format=None):
 #     return Response({
 #         'users': reverse('user-list', request=request, format=format),
-#         # 'api_home' might be wrong
-#         'habits': reverse('api_home', request=request, format=format)
+#         'books': reverse('book-list', request=request, format=format),
 #     })
+
+@api_view(['GET']) 
+def api_root(request, format=None):
+    return Response({
+        'habits': reverse('habits_list', request=request, format=format),
+        # 'api_home' might be wrong
+        'records': reverse('records_list', request=request, format=format)
+    })
 
 # class api_root(ListAPIView):
 #     queryset = User.objects.all()
