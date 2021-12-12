@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from core.models import Habit, Record
+from core.models import Habit, Record, User
 from django.contrib.auth.models import User
 
 
@@ -8,21 +8,20 @@ from django.contrib.auth.models import User
 # class UserSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = User
-#         fields = (all)
+#         fields = ('username')
 
-# class RecordsForHabitSerializer(serializers.ModelSerializer):
-#         habit = serializers.StringRelatedField()
-#     class  Meta:
-#         Model = Record
-#         fields = (
-#                 'habit'
-#                 'amount',
-#                 'date',)
+
+class UserSerializer(serializers.HyperlinkedModelSerializer): # new
+    habits = serializers.StringRelatedField(read_only=True, many=True)
+
+# class Meta:
+    model = User
+    fields = ('url', 'id', 'username',) 
 
 
 class RecordSerializer(serializers.ModelSerializer):
-        # habit = serializers.StringRelatedField(read_only=True)
-        # user = serializers.StringRelatedField(read_only=True)
+        habit = serializers.StringRelatedField(read_only=True)
+        user = serializers.StringRelatedField(read_only=True)
 
         class Meta:
             model = Record

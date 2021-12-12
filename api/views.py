@@ -10,47 +10,55 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIV
 from rest_framework.response import Response
 from rest_framework.reverse import reverse 
 
-from core.models import Habit, Record
+from core.models import Habit, Record, User
 from .permissions import IsOwnerOrReadOnly
-from .serializers import HabitSerializer, RecordSerializer
+from .serializers import HabitSerializer, RecordSerializer, UserSerializer
 
 
 # Create your views here.
 
-# @api_view(['GET'])
-# def api_root(request, format=None):
-#     return Response({
-#         'users': reverse('user-list', request=request, format=format),
-#         'books': reverse('book-list', request=request, format=format),
-#     })
 
 @api_view(['GET']) 
 def api_root(request, format=None):
     return Response({
         'habits': reverse('habits_list', request=request, format=format),
-        # 'api_home' might be wrong
-        'records': reverse('records_list', request=request, format=format)
+        'records': reverse('records_list', request=request, format=format),
+        'users': reverse('users_list', request=request, format=format)
     })
 
-# class api_root(ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
+
+
+class UserViewSet(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+    #                       IsOwnerOrReadOnly]
+
+
 
 class HabitListView(ListCreateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
 
 
 class HabitDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
     
     
 
 class RecordListView(ListCreateAPIView):
     queryset = Record.objects.all()
     serializer_class = RecordSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
 
 class RecordDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Record.objects.all()
     serializer_class = RecordSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly]
