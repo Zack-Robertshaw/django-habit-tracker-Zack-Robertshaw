@@ -35,6 +35,8 @@ urlpatterns = [
     path('api/habits/<int:pk>/', api_views.HabitDetailView.as_view(), name="habits_detail"),
     path('api/records/', api_views.RecordListView.as_view(), name="records_list"),
     path('api/records/<int:pk>/', api_views.RecordDetailView.as_view(), name="records_detail"),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
 
 
 ]

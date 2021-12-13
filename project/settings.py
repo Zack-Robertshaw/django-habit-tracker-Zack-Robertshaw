@@ -45,11 +45,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
 
     # Third-party
     'debug_toolbar',
     'django_extensions',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+
 
     # Project-specific
     'core',
@@ -167,6 +170,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': 
+       [ 'rest_framework.authentication.TokenAuthentication'],
 }
 
 # REST_FRAMEWORK = {

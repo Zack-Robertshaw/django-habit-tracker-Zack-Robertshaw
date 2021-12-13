@@ -1,3 +1,5 @@
+# from django.contrib.auth.models import User
+
 from django.db.models import fields
 from rest_framework import serializers
 from core.models import Habit, Record, User
@@ -14,7 +16,7 @@ from django.contrib.auth.models import User
 class UserSerializer(serializers.HyperlinkedModelSerializer): # new
     habits = serializers.StringRelatedField(read_only=True, many=True)
 
-# class Meta:
+class Meta:
     model = User
     fields = ('url', 'id', 'username',) 
 
