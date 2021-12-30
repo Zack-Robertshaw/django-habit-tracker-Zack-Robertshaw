@@ -5,18 +5,10 @@
 
 {% load static %}
 
-{% block javascript %}
-<script src={% static 'js/script.js' %} defer></script>
-{% endblock javascript %}
 
 
 <div class="columns">
     <div class="column">
-        <div class="card">
-            <div class="card-content">
-                <h2 class="title"><a href="{% url 'add_record' pk=habit.pk %}">Record Progress</a></h2>
-            </div>
-        </div>
         <div class="card">
             <div class="card-content">
                 <h2 class="title"><a href="{% url 'home' %}">Back to Habits</a></h2>
@@ -46,11 +38,23 @@
         {% endfor %}
 
     </div>
+
     <div class="column">
         <div class="card">
             <div class="card-content">
+                <h2 class="title">Record todays progress for {{ habit.name }}</h2>
+                <form action="{% url 'habit_records' pk=habit.pk %}" method="POST">
+                {% csrf_token %}
+                <h2 class="subtitle">{{ form.as_p }}</h2>
+                <button type="submit">Submit Record</button>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
                 <h3 class="subtitle">How many more you need to reach your goal</h3>
-                <h2 id="display" class="title"></h2>
+                <h2 id="display" class="title">{{ total }}</h2>
                 
             </div>
         </div>

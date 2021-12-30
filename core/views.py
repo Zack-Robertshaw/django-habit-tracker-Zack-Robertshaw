@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import User, Habit, Record
 from .forms import HabitForm, RecordForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 
 
 @login_required
@@ -29,9 +30,21 @@ def home(request):
 def habit_records(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     records = Record.objects.filter(habit_id=habit.pk)
+    total = Record.objects.filter(habit_id=habit.pk).aggregate(Sum('amount'))
+
+    if request.method == 'GET':
+        form = RecordForm()
+    else:
+        form = RecordForm(data=request.POST)
+        if form.is_valid():
+            record = form.save(commit=False)
+            record.habit_id = habit.pk
+            record.save()
+            return redirect(to='habit_records', pk=pk)
+
 
     return render(request, "tracker/habit_records.html", {
-        "records": records, "habit": habit})
+        "form": form, "records": records, "habit": habit, "total": total})
 
 
 
@@ -75,5 +88,13 @@ def delete_record(request, pk):
                   { "habit": habit, "record": record})
 
 
+# def sum_records(request, pk):
+#     habit = get_object_or_404(Habit, pk=pk)
+#     user = get_object_or_404(User, pk=pk)
+#     records = Record.object.filter(user_id=user.pk, habit_id=habit.pk)
+#     total = records.aggregate(Sum('amount'))
+    
+#     return()
 
 
+# (Record.objects.filter(user_id=user.pk, habit_id=habit.pk).aggregate(Sum('amount')))

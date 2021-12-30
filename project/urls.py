@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.home, name='home'),
-    path('tracker/<int:pk>/add_record/', views.add_record, name='add_record'),
+    # path('tracker/<int:pk>/add_record/', views.add_record, name='add_record'),
     path('tracker/<int:pk>/habit_records/', views.habit_records, name='habit_records'),
     path('tracker/<int:pk>/delete_habit/', views.delete_habit, name='delete_habit'),
     path('tracker/<int:pk>/delete_record/', views.delete_record, name='delete_record'),
