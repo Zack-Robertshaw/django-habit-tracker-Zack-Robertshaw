@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Sum
+
 
 class User(AbstractUser):
     
@@ -28,6 +30,9 @@ class Habit(models.Model):
         def __repr__(self):
             return f"<Habit name={self.name}>"
 
+
+
+
 class Record(models.Model):
     user = models.ForeignKey(
         'User', on_delete=models.CASCADE, default=None, null=True)
@@ -37,10 +42,11 @@ class Record(models.Model):
     date = models.DateField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-# when these aren't commented out throws error at add_record in admin
     def __str__(self):
         return f" Record for {self.habit.name}"
 
     def __repr__(self):
         return f"<Record name={self.user}>"
+
+
 

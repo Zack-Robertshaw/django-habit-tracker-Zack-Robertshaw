@@ -31,7 +31,6 @@ def habit_records(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     records = Record.objects.filter(habit_id=habit.pk)
     total = Record.objects.filter(habit_id=habit.pk).aggregate(Sum('amount'))
-
     if request.method == 'GET':
         form = RecordForm()
     else:
@@ -44,7 +43,7 @@ def habit_records(request, pk):
 
 
     return render(request, "tracker/habit_records.html", {
-        "form": form, "records": records, "habit": habit, "total": total})
+        "form": form, "records": records, "habit": habit, "total":total})
 
 
 
@@ -88,13 +87,3 @@ def delete_record(request, pk):
                   { "habit": habit, "record": record})
 
 
-# def sum_records(request, pk):
-#     habit = get_object_or_404(Habit, pk=pk)
-#     user = get_object_or_404(User, pk=pk)
-#     records = Record.object.filter(user_id=user.pk, habit_id=habit.pk)
-#     total = records.aggregate(Sum('amount'))
-    
-#     return()
-
-
-# (Record.objects.filter(user_id=user.pk, habit_id=habit.pk).aggregate(Sum('amount')))
