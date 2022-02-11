@@ -30,6 +30,7 @@ def home(request):
 def habit_records(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     records = Record.objects.filter(habit_id=habit.pk)
+    # total = Record.record_amount()
     total = Record.objects.filter(habit_id=habit.pk).aggregate(Sum('amount'))
 
     if request.method == 'GET':
@@ -88,13 +89,3 @@ def delete_record(request, pk):
                   { "habit": habit, "record": record})
 
 
-# def sum_records(request, pk):
-#     habit = get_object_or_404(Habit, pk=pk)
-#     user = get_object_or_404(User, pk=pk)
-#     records = Record.object.filter(user_id=user.pk, habit_id=habit.pk)
-#     total = records.aggregate(Sum('amount'))
-    
-#     return()
-
-
-# (Record.objects.filter(user_id=user.pk, habit_id=habit.pk).aggregate(Sum('amount')))
