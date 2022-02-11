@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     # Project-specific
     'core',
     'api',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [
