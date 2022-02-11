@@ -30,9 +30,7 @@ def home(request):
 def habit_records(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     records = Record.objects.filter(habit_id=habit.pk)
-    # total = Record.record_amount()
     total = Record.objects.filter(habit_id=habit.pk).aggregate(Sum('amount'))
-
     if request.method == 'GET':
         form = RecordForm()
     else:
@@ -45,7 +43,7 @@ def habit_records(request, pk):
 
 
     return render(request, "tracker/habit_records.html", {
-        "form": form, "records": records, "habit": habit, "total": total})
+        "form": form, "records": records, "habit": habit, "total":total})
 
 
 

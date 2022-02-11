@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load mathfilters %}
 
 
 {% block content %}
@@ -18,7 +19,7 @@
             <div class="card-content">
                 <h2 class="title">Here's your goal towards {{ habit.name }}</h2>
                 <h2 class="subtitle">Your goal is:</h2>
-                <h1 class="title" id="goal">{{ habit.goal }}</h1>
+                <h1 class="title" id="goal">{{ habit.goal }} {{ habit.goal_unit }}</h1>
             </div>
         </div>
 
@@ -53,11 +54,20 @@
 
         <div class="card">
             <div class="card-content">
-                <h3 class="subtitle">How many more you need to reach your goal</h3>
-                <h2 id="display" class="title">{{ total.amount__sum }}</h2>
+                <h3 class="title">You have done {{ total.amount__sum }} {{ habit.goal_unit }} so far! </h3>
+                <!-- <h2 id="display" class="title">{{ total.amount__sum }}</h2> -->
                 
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-content">
+                <h3 class="title">You have got {{ habit.goal|sub:total.amount__sum }} {{ habit.goal_unit }} to go! </h3>
+                <!-- <h2 id="display" class="title">{{ total.amount__sum }}</h2> -->
+                
+            </div>
+        </div>
+
     </div>
 
 </div>
