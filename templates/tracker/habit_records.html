@@ -29,8 +29,8 @@
         {% for record in records %}
         <div class="card">
             <div class="card-content" >
-                <h2 class="title">Record: <span class="records">{{ record.amount }}</span></h2>
-                <h3 class="subtitle">Date Added: {{ record.date }}</h3>
+                <h2 class="title">{{ record.date }}</h2>
+                <h2 class="title">You did {{ record.amount }} {{ habit.goal_unit }}</h2>
             </div>
             <div class="card-footer-item">
                 <!-- <a href="{% url 'delete_record' pk=record.pk %}">Delete Record</a>  -->
@@ -55,7 +55,6 @@
         <div class="card">
             <div class="card-content">
                 <h3 class="title">You have done {{ total.amount__sum }} {{ habit.goal_unit }} so far! </h3>
-                <!-- <h2 id="display" class="title">{{ total.amount__sum }}</h2> -->
                 
             </div>
         </div>
@@ -63,8 +62,7 @@
         <div class="card">
             <div class="card-content">
                 <h3 class="title">You have got {{ habit.goal|sub:total.amount__sum }} {{ habit.goal_unit }} to go! </h3>
-                <!-- <h2 id="display" class="title">{{ total.amount__sum }}</h2> -->
-                
+                <!--Want to display message congrats message when goal <= amount  -->
             </div>
         </div>
 

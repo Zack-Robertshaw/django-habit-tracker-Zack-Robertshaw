@@ -10,12 +10,12 @@
 <div class="columns">
     <div class="column">
         <div class="card">
+            <h2 class="title">Make a New Habit</h3>
             <form action="{% url 'home' %}" method="POST">
-                <h2 class="title">Make a New Habit</h3>
-                {% csrf_token %}
-                <h3 class="subtitle">{{ form.as_p }}</h3>
-                <button type="submit"> Create Habit</button>
-            </div>
+            {% csrf_token %}
+            <h3 class="subtitle">{{ form.as_p }}</h3>
+            <button type="submit"> Create Habit</button>
+        </div>
     </div>
 
     <div class="column">
